@@ -50,18 +50,19 @@ class DrawingUtil {
         DrawingUtil.drawLine(context, 0, 0, 0, -size)
         context.restore()
         const r : number = size / rFactor
-        DrawingUtil.drawCircle(context, w / 2, r + (h - 2 * r) * sf2, r)
+        DrawingUtil.drawCircle(context, size / 2, r + (h / 2 - 2 * r) * sf2, r)
+        console.log(scale, r, h, size)
     }
 
     static drawJLBNode(context : CanvasRenderingContext2D, i : number, scale : number) {
-        const gap : number = w / (nodes + 1)
+        const gap : number = w / (nodes)
         const size : number = gap / sizeFactor
         context.strokeStyle = foreColor
         context.fillStyle = foreColor
         context.lineCap = 'round'
         context.lineWidth = Math.min(w, h) / strokeFactor
         context.save()
-        context.translate(gap  * (i + 1), h)
+        context.translate(gap * i, 0)
         DrawingUtil.drawRotateLineJumpingCircle(context, h, scale, size)
         context.restore()
     }
