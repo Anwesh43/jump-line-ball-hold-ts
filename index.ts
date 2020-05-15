@@ -210,3 +210,25 @@ class JumpingBallLineHolder {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    jblh : JumpingBallLineHolder = new JumpingBallLineHolder()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.jblh.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.jblh.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.jblh.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
